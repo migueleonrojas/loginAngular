@@ -1,0 +1,12 @@
+
+<div *ngIf="!formularioValidado;else formValid">
+    <app-signin (formValido)="obtenerValid($event)" (formulario)="obtenerForm($event)"></app-signin>
+</div>
+
+
+<ng-template #formValid>
+    <app-validando-registro [datForm]="datosFormulario"></app-validando-registro>
+</ng-template>
+
+
+

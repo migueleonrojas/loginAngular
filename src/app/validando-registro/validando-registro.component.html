@@ -1,0 +1,65 @@
+
+    <div class="container correo" style="width: 400px;">
+
+        <div class="mb-3">
+    
+            <h1>Autenticando correo</h1>
+        
+        </div>
+
+
+        <div class="mb-3">
+
+            <p>Se acaba de enviar un correo con un codigo de validacion</p>
+
+        </div>
+
+        <div class="mb-3">
+
+            
+            <label for="cod-email" class="form-label">Confirmar Contraseña</label>
+
+            <input type="password" class="form-control" id="cod-email"
+                placeholder="Ingrese la contraseña por favor" #codigoEmail>
+            
+
+        </div>
+
+        <div class="mb-3">
+
+            <div class="col">
+                <button type="submit" class="btn btn-primary"
+                (click)="autenticar(codigoEmail)">Autenticarse</button>
+            </div>
+
+            
+            
+
+            
+
+        </div>
+
+        <div *ngIf="errorCod" class="mb-3 text-center">
+            <div class="col">El codigo es incorrecto</div>
+        </div>
+
+        <div *ngIf="codigoVencido" class="mb-3 text-center">
+            <div class="col">El codigo es incorrecto</div>
+        </div>
+        
+
+    </div>
+
+
+    <div class="container timer text-center" style="width: 250px;">
+        <app-timer></app-timer>
+    </div>
+    
+
+
+
+
+
+    
+
+    

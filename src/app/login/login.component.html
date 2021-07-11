@@ -1,0 +1,46 @@
+
+    <div class="container-tittle">
+        
+        <h1>Portal de Pagos</h1>
+        
+    </div>
+
+    <div class="content-center">
+        <div class="container p-2 content-form">
+            <div class="col-12">
+                <form>
+                    <h1>Acceso al portal</h1>
+                    <div class="mb-3">
+                        <label for="usuario" class="form-label">Usuario</label>
+                        <input type="text" class="form-control" id="usuario" 
+                        aria-describedby="usuario" placeholder="Ingrese el usuario por favor">
+                        
+                    </div>
+                    <div class="mb-3">
+                        <label for="clave" class="form-label">Contraseña</label>
+                        <input type="password" class="form-control" id="clave"
+                        placeholder="Ingrese la contraseña por favor">
+                    </div>
+
+                    <div class="mb-3">
+                        <button (click)="accediendo()"
+                        type="submit" class="btn btn-primary">Acceder</button>
+                    </div>
+
+                    <div class="mb-3">
+                        <button (click)="registrarse()"
+                        type="button" class="btn btn-primary">
+                            Registrese aqui si no tiene cuenta
+                        </button>
+                    </div>
+
+                    
+
+ 
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <app-footer-bar></app-footer-bar>
+
