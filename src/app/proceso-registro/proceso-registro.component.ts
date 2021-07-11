@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProcesoRegistroComponent implements OnInit {
 
-  formularioValidado:boolean=true;
+  formularioValidado:boolean=false;
 
   datosFormulario:any;
 
