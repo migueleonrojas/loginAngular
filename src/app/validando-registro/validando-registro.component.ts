@@ -54,12 +54,32 @@ export class ValidandoRegistroComponent implements OnInit {
 
   autenticar(inputCodigoMail:any){
 
-    //this.toastr.success('Hello world!', 'Toastr fun!');
+    console.log(this.datosUsuario);
+
+    this.operacionBbddService.agregarUsuario({
+      Nombre: this.datosUsuario.nombreCompleto.value,
+      Usuario: this.datosUsuario.usuarioIndicado.value,
+      Correo: this.datosUsuario.correo.value,
+      Clave:this.datosUsuario.claveNueva.value,
+      FechaDeNacimiento: this.datosUsuario.fechaDeNacimiento.value,
+      Registrado: "true",
+      Estatus: "activo",
+      Saldo: 0,
+      Rol: "usuario",
+      tVal: new Date(),
+      cod:inputCodigoMail.value
+
+    }).subscribe(res => {
+
+      console.log(res);
+      console.log(inputCodigoMail.value);
+
+    });
 
 
 
     
-    if((<HTMLInputElement>inputCodigoMail).value == this.codigoValidacion){
+    /*if((<HTMLInputElement>inputCodigoMail).value == this.codigoValidacion){
 
       this.router.navigate(['acceso']);
 
@@ -67,10 +87,11 @@ export class ValidandoRegistroComponent implements OnInit {
 
     else{
       this.errorCod = true;
-    }
+    }*/
     
 
   }
+  
 
   enviarCorreoConCodigoDeValidacion(correoUsuario:string){
 

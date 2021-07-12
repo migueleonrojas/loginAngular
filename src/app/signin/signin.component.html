@@ -171,6 +171,11 @@
                         formControlName="recaptcha"></ngx-recaptcha2>
                         
                     </div>
+
+                    <div *ngIf="usuarioExiste"
+                        class="mb-3 text-xs-center">
+                        El usuario que quiere ingresar ya se encuentra registrado
+                    </div>
                     
 
 

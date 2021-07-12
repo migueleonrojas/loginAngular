@@ -1,7 +1,7 @@
 section {
-    width: 100%;
-    height: 100%;
-    min-height: 100vh;
+    width: 200px;
+    height: 50px;
+    min-height: 200px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -53,7 +53,7 @@ ul {
 .time-countdown ul li span {
     color: #FFF;
     font-family: 'Poppins', sans-serif;
-    font-size: 50px;
+    font-size: 10px;
     line-height: 60px;
     font-weight: 700;
     display: block;

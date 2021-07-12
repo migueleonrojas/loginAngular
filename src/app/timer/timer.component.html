@@ -1,2 +1,18 @@
+<div class="container">
 
+    <div class="row">
+
+        <div *ngIf="!timeOut;else tiempoExpirado" class="mb-3">
+            Tiempo de expiracion de su codido de validacion es de {{minutes}}:{{seconds}}
+        </div>
+
+        <ng-template #tiempoExpirado class="mb-3">
+            <div class="col text-center">
+                <button class="btn btn-primary" (click)="reenviarCodigo()">Reenviar codigo</button>
+            </div>
+        </ng-template>
+        
+
+    </div>
+</div>
             

@@ -20,6 +20,8 @@ export class SigninComponent implements OnInit {
   
   usuarioExistente:any;
 
+  usuarioExiste:boolean=false;
+
   correoMaxLen = "50";
 
   dateMax:any =  this.datepipe.transform(new Date(), 'yyyy-MM-dd');
@@ -131,13 +133,13 @@ export class SigninComponent implements OnInit {
         console.log(this.usuarioExistente);
 
         if(this.usuarioExistente.usuario == null){
-          this.formValido.emit(false);
+          this.formValido.emit(true);
           this.formulario.emit(parametro.controls);
         }
 
         else{
 
-          
+          this.usuarioExiste = true;
 
         }
 
@@ -158,24 +160,8 @@ export class SigninComponent implements OnInit {
 
   }
 
-  /*
-  eliminarUsuario(usuario:any){
 
-    console.log(usuario);
-
-
-
-    this.operacionBbddService.eliminarUsuario(usuario).subscribe(resultado =>{
-
-      console.log(resultado);
-
-    },
-    error =>{
-
-    });
-
-  }
-  */
+  
 
 
 }
