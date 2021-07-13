@@ -27,6 +27,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { NgxCaptchaModule } from 'ngx-captcha';
 import { ProcesoRegistroComponent } from './proceso-registro/proceso-registro.component';
 import { TimerComponent } from './timer/timer.component';
+import { ColocarCeroPipe } from './timer/pipesTimer/colocar-cero.pipe';
 
 
 const routes: Routes = [
@@ -50,7 +51,8 @@ const routes: Routes = [
     SigninComponent,
     ValidandoRegistroComponent,
     ProcesoRegistroComponent,
-    TimerComponent
+    TimerComponent,
+    ColocarCeroPipe
   ],
   imports: [
     BrowserModule,

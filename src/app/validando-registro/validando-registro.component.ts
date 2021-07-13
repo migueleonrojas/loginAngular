@@ -22,6 +22,8 @@ export class ValidandoRegistroComponent implements OnInit {
   objRespuestaCorreo:any;
   errorCod:boolean=false;
   codigoVencido:boolean= false;
+  correoParaReenviar:string;
+  validandoUsuario:any;
   
   constructor(
     public router: Router, 
@@ -46,6 +48,8 @@ export class ValidandoRegistroComponent implements OnInit {
     this.datosUsuario =  this.datForm;
     
     this.enviarCorreoConCodigoDeValidacion(this.datosUsuario.correo.value);
+
+    this.correoParaReenviar = this.datosUsuario.correo.value;
     
   }
 
@@ -54,7 +58,7 @@ export class ValidandoRegistroComponent implements OnInit {
 
   autenticar(inputCodigoMail:any){
 
-    console.log(this.datosUsuario);
+    
 
     this.operacionBbddService.agregarUsuario({
       Nombre: this.datosUsuario.nombreCompleto.value,
@@ -66,14 +70,39 @@ export class ValidandoRegistroComponent implements OnInit {
       Estatus: "activo",
       Saldo: 0,
       Rol: "usuario",
-      tVal: new Date(),
+      tVal: new Date().getTime(),
       cod:inputCodigoMail.value
 
     }).subscribe(res => {
 
-      console.log(res);
-      console.log(inputCodigoMail.value);
+      this.validandoUsuario = res;
 
+      console.log(this.validandoUsuario.mensaje.codigo);
+
+      if(this.validandoUsuario.mensaje !=  null){
+
+        if(this.validandoUsuario.mensaje.codigo == 3){
+
+          this.codigoVencido = true;
+          this.errorCod = false;
+        }
+        else if(this.validandoUsuario.mensaje.codigo == 2){
+
+          this.errorCod = true;
+          this.codigoVencido = false;
+
+        }
+        else if(this.validandoUsuario.mensaje.codigo == 1){
+
+          this.toastr.success(`El usuario se creo con exito`);
+          this.router.navigate(['acceso']);
+
+        }
+
+        
+
+      } 
+      
     });
 
 
@@ -95,8 +124,6 @@ export class ValidandoRegistroComponent implements OnInit {
 
   enviarCorreoConCodigoDeValidacion(correoUsuario:string){
 
-    console.log(correoUsuario);
-    console.log('correo enviado');
 
     this.usuarioCorreoService.enviarCorreo({correo:correoUsuario}).subscribe(resultado =>{
 
