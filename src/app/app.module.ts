@@ -28,13 +28,13 @@ import { NgxCaptchaModule } from 'ngx-captcha';
 import { ProcesoRegistroComponent } from './proceso-registro/proceso-registro.component';
 import { TimerComponent } from './timer/timer.component';
 import { ColocarCeroPipe } from './timer/pipesTimer/colocar-cero.pipe';
-
+import { LoginGuardGuard } from './seguridad/login-guard.guard';
 
 const routes: Routes = [
   
   { path: '', component: AppComponent },
   { path: 'acceso', component: LoginComponent },
-  { path: 'inicio', component: InicioComponent},
+  { path: 'inicio', component: InicioComponent, canActivate: [LoginGuardGuard]},
   { path: 'registrandose', component: ProcesoRegistroComponent},
   { path: '**', component: LoginComponent}
 

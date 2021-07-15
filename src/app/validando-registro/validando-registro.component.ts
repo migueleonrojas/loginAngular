@@ -71,9 +71,12 @@ export class ValidandoRegistroComponent implements OnInit {
       Saldo: 0,
       Rol: "usuario",
       tVal: new Date().getTime(),
-      cod:inputCodigoMail.value
+      cod: inputCodigoMail.value,
+      Intentos: 3
 
     }).subscribe(res => {
+
+      console.log(res);
 
       this.validandoUsuario = res;
 

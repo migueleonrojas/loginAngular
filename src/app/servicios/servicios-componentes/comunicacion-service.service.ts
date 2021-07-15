@@ -6,13 +6,18 @@ import { Subject } from 'rxjs';
 })
 export class ComunicacionService {
 
-  mensaje!: any;
+  mensaje: string;
 
-  private enviarMensajeSubject = new Subject<any>();
+  private enviarMensajeSubject = new Subject<string>();
+
+  recibir(){
+
+    return this.enviarMensajeSubject.asObservable();
+  }
   
-  enviarMensajeObservable = this.enviarMensajeSubject.asObservable();
+  
  
-  enviarMensaje(mensaje: any) {
+  enviar(mensaje: any) {
     this.mensaje = mensaje;
     this.enviarMensajeSubject.next(mensaje);
   }

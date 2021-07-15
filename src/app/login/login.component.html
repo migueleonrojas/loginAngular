@@ -8,22 +8,50 @@
     <div class="content-center">
         <div class="container p-2 content-form">
             <div class="col-12">
-                <form>
+                <form [formGroup]="formularioLogin">
                     <h1>Acceso al portal</h1>
                     <div class="mb-3">
                         <label for="usuario" class="form-label">Usuario</label>
-                        <input type="text" class="form-control" id="usuario" 
+                        <input formControlName="nombreUsuario"
+                        type="text" class="form-control" id="usuario" 
                         aria-describedby="usuario" placeholder="Ingrese el usuario por favor">
-                        
+                        <div class="errorCodigo" *ngIf="formularioLogin.get('nombreUsuario')!.hasError('required') && formularioLogin.get('nombreUsuario')!.touched">
+                            * El campo nombre no debe estar vacio
+                        </div>
+                        <div class="errorCodigo" *ngIf="formularioLogin.get('nombreUsuario').hasError('hayEspacio')  && formularioLogin.get('nombreUsuario')!.touched">
+                            * No debes agregar espacios en blanco
+                        </div>
+                        <div class="errorCodigo" *ngIf="formularioLogin.get('nombreUsuario')!.hasError('minlength') && formularioLogin.get('nombreUsuario')!.touched">
+                            * Debe contener minimo de 6 caracteres
+                        </div>
+                        <div class="errorCodigo" *ngIf="formularioLogin.get('nombreUsuario')!.hasError('maxlength') && formularioLogin.get('nombreUsuario')!.touched">
+                            * Debe contener maximo de 20 caracteres
+                        </div>
                     </div>
+                    
+
                     <div class="mb-3">
                         <label for="clave" class="form-label">Contraseña</label>
-                        <input type="password" class="form-control" id="clave"
+                        <input formControlName="claveUsuario"
+                        type="password" class="form-control" id="clave"
                         placeholder="Ingrese la contraseña por favor">
+                        <div class="errorCodigo" *ngIf="formularioLogin.get('claveUsuario')!.hasError('required') && formularioLogin.get('claveUsuario')!.touched">
+                            * El campo clave no debe estar vacio
+                        </div>
+                        <div class="errorCodigo" *ngIf="formularioLogin.get('claveUsuario').hasError('hayEspacio')  && formularioLogin.get('claveUsuario')!.touched">
+                            * No debes agregar espacios en blanco
+                        </div>
+                        <div class="errorCodigo" *ngIf="formularioLogin.get('claveUsuario')!.hasError('minlength') && formularioLogin.get('claveUsuario')!.touched">
+                            * Debe contener minimo de 6 caracteres
+                        </div>
+                        <div class="errorCodigo" *ngIf="formularioLogin.get('claveUsuario')!.hasError('maxlength') && formularioLogin.get('claveUsuario')!.touched">
+                            * Debe contener maximo de 20 caracteres
+                        </div>
                     </div>
 
                     <div class="mb-3">
-                        <button (click)="accediendo()"
+                        <button (click)="accediendo(formularioLogin)"
+                        [disabled]="!formularioLogin.valid"
                         type="submit" class="btn btn-primary">Acceder</button>
                     </div>
 
@@ -32,6 +60,7 @@
                         type="button" class="btn btn-primary">
                             Registrese aqui si no tiene cuenta
                         </button>
+                        <div *ngIf="!usuarioRegistrado">El usuario no se encuentra registrado</div>
                     </div>
 
                     

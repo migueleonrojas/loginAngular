@@ -118,6 +118,7 @@ export class SigninComponent implements OnInit {
         Estatus: 'inactivo',
         Saldo: 0,
         Rol:'usuario'
+      
       } 
       
 

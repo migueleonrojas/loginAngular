@@ -34,6 +34,26 @@ export class OperacionBbddService {
 
   }
 
+  consultarPorNombreUsuario(nombreUsuario:any){
+
+    let json = JSON.stringify(nombreUsuario);
+
+    let headers = new HttpHeaders().set('Content-Type','application/json')
+
+    return this.httpClient.post("http://localhost:3000/consultaPorNombreDeUsuario", json, {headers : headers});
+
+  }
+
+  loginUsuario(datosPrincipal:any){
+
+    let json = JSON.stringify(datosPrincipal);
+
+    let headers = new HttpHeaders().set('Content-Type','application/json');
+
+    return this.httpClient.post("http://localhost:3000/loguearUsuario", json, {headers : headers});
+
+  }
+
   actualizarUsuario(nombreUsuario:any){
 
     let json = JSON.stringify(nombreUsuario);

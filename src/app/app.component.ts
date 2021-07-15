@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NavigationEnd, Router  } from '@angular/router';
-
+import { ComunicacionService } from './servicios/servicios-componentes/comunicacion-service.service';
 
 @Component({
   selector: 'app-root',
@@ -10,11 +10,16 @@ import { NavigationEnd, Router  } from '@angular/router';
 export class AppComponent implements OnInit{
   title = 'portalDePagos';
   
-  constructor(public router: Router){
+  constructor(
+    public router: Router,
+    public comunicacionService:ComunicacionService
+    ){
 
+      
+      
   }
 
-  ngOnInit(): void {
+  ngOnInit() {
     //solo se carga la primera vez
     this.router.events.subscribe((e) => {
       if (e instanceof NavigationEnd) {
@@ -29,11 +34,12 @@ export class AppComponent implements OnInit{
         
       }
     }); 
-      
+
+
+    
+
+    //this.crearEnLocalStorage();
+    
   }
-
-  
-
-
 
 }
