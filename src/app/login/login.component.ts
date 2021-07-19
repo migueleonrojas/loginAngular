@@ -14,8 +14,6 @@ import { ComunicacionService } from '../servicios/servicios-componentes/comunica
 })
 export class LoginComponent implements OnInit {
 
-  
-
   formularioLogin: FormGroup | any;
   validacionLogin: any;
   usuarioRegistrado:boolean = true;
@@ -32,17 +30,13 @@ export class LoginComponent implements OnInit {
 
       nombreUsuario: [ '' , [Validators.required, ContieneEspacios, Validators.minLength(6), Validators.maxLength(20) ] ],
       claveUsuario:  [ '' , [Validators.required, Validators.minLength(6), Validators.maxLength(20) , ContieneEspacios] ],
-
-
     });
-
-    
+   
    }
 
 
   accediendo(formulariologin:any){
 
-    
     this.operacionBbddService.loginUsuario({
 
       Usuario: formulariologin.controls.nombreUsuario.value,
@@ -52,32 +46,21 @@ export class LoginComponent implements OnInit {
 
       this.validacionLogin = respuesta;
 
-      console.log(respuesta);
-
       if(this.validacionLogin.usuario != null ){
 
         localStorage.setItem("usuario", formulariologin.controls.nombreUsuario.value);   
         this.router.navigate(['inicio']);
         this.usuarioRegistrado = true;
-        
-
+      
       }
 
       else if(this.validacionLogin.usuario == null){
 
-        this.usuarioRegistrado = false;
-        
+        this.usuarioRegistrado = false;      
 
       }
 
-      
-
-
     })
-
-    //this.router.navigate(['inicio']);
-    
-
   }
 
   registrarse(){
@@ -87,6 +70,8 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
+
   }
 
 }

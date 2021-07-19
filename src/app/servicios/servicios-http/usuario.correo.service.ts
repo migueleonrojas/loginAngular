@@ -24,5 +24,25 @@ export class UsuarioCorreoService {
 
   }
 
+  enviarUsuarioPorCorreo(correo:any){
+
+    let json = JSON.stringify(correo);
+
+    let headers = new HttpHeaders().set('Content-Type','application/json')
+
+    return this.httpClient.post("http://localhost:3000/enviarUsuarioPorCorreo", json, {headers : headers});
+
+  }
+
+  enviarClavePorCorreo(usuario:any){
+
+    let json = JSON.stringify(usuario);
+
+    let headers = new HttpHeaders().set('Content-Type','application/json')
+
+    return this.httpClient.post("http://localhost:3000/enviarPassPorCorreo", json, {headers : headers});
+
+  }
+
 
 }

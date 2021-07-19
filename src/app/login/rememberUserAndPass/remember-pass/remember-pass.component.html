@@ -1,0 +1,31 @@
+<ng-template #content let-modal>
+    <form [formGroup]="formUsuario">
+        <div class="modal-header">
+            <h4 class="modal-title">Recordar su contraseña</h4>
+            <button style="outline: none;" type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <label>Indique su nombre de usuario</label>
+            <input formControlName="nombreUsuario" (input)="ocultarMensajes()"
+            class="form-control input-lg" type="text" placeholder="Ingrese su nombre de usuario" #usuario>
+            <div class="errorCodigo" *ngIf="formUsuario.get('nombreUsuario')!.hasError('required') && formUsuario.get('nombreUsuario')!.touched">
+                No dejar en blanco
+            </div>
+            <div *ngIf="validacionExistente" class="error">
+                <p>El usuario <strong>"{{usuario.value}}"</strong> no existe</p>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-success" [disabled]="!formUsuario.valid"
+            (click)="enviarClave(usuario.value)">Enviar</button>
+            <button type="button" class="btn btn-danger" (click)="modal.close('Cancelar click')">Cancelar</button>
+        </div>
+    </form>
+</ng-template>
+  
+
+<button class="btn btn-default btn-sm" (click)="open(content)">Recordar Contraseña</button>
+  
+  

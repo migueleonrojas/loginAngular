@@ -29,6 +29,9 @@ import { ProcesoRegistroComponent } from './proceso-registro/proceso-registro.co
 import { TimerComponent } from './timer/timer.component';
 import { ColocarCeroPipe } from './timer/pipesTimer/colocar-cero.pipe';
 import { LoginGuardGuard } from './seguridad/login-guard.guard';
+import { RememberPassComponent } from './login/rememberUserAndPass/remember-pass/remember-pass.component';
+import { RememberUserComponent } from './login/rememberUserAndPass/remember-user/remember-user.component';
+
 
 const routes: Routes = [
   
@@ -52,7 +55,9 @@ const routes: Routes = [
     ValidandoRegistroComponent,
     ProcesoRegistroComponent,
     TimerComponent,
-    ColocarCeroPipe
+    ColocarCeroPipe,
+    RememberPassComponent,
+    RememberUserComponent
   ],
   imports: [
     BrowserModule,
@@ -66,7 +71,8 @@ const routes: Routes = [
     AngularFireDatabaseModule,
     AngularFireModule.initializeApp(environment.firebase),
     HttpClientModule,
-    NgxCaptchaModule
+    NgxCaptchaModule,
+    CommonModule
     
     
   ],

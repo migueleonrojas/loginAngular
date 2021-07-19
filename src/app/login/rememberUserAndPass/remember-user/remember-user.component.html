@@ -1,0 +1,30 @@
+<ng-template #content let-modal>
+    <form [formGroup]="formCorreo">
+        <div class="modal-header">
+            <h4 class="modal-title">Recordar el nombre del usuario</h4>
+            <button style="outline: none;" type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <label>Indique su correo para enviarle su nombre de usuario por correo</label>
+            <input formControlName="nombreCorreo" (input)="ocultarMensajes()"
+            class="form-control input-lg" type="text" placeholder="Ingrese su correo" #correo>
+            <div class="errorCodigo" *ngIf="formCorreo.get('nombreCorreo')!.hasError('required') && formCorreo.get('nombreCorreo')!.touched">
+                No dejar en blanco
+            </div>
+            <div *ngIf="validacionExistente" class="error">
+                <p>El usuario con el correo <strong>"{{correo.value}}"</strong> no existe</p>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-success" [disabled]="!formCorreo.valid"
+            (click)="enviarNombreDeUsuario(correo.value)">Enviar</button>
+            <button type="button" class="btn btn-danger" (click)="modal.close('Cancelar click')">Cancelar</button>
+        </div>
+    </form>
+</ng-template>
+  
+<button class="btn btn-default btn-sm mr-4" (click)="open(content)">Recordar Usuario</button>
+  
+  
