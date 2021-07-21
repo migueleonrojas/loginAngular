@@ -54,13 +54,13 @@ export class OperacionBbddService {
 
   }
 
-  actualizarUsuario(nombreUsuario:any){
+  actualizarEstatusUsuario(nombreUsuario:any){
 
     let json = JSON.stringify(nombreUsuario);
 
     let headers = new HttpHeaders().set('Content-Type','application/json')
 
-    return this.httpClient.post("http://localhost:3000/actualizarUsuario", json, {headers : headers});
+    return this.httpClient.put("http://localhost:3000/actualizarUsuario", json, {headers : headers});
 
   }
 
@@ -82,6 +82,8 @@ export class OperacionBbddService {
     return this.httpClient.post('http://localhost:3000/consultarUltimoUsuario',null);
 
   }
+
+ 
 
 
 }

@@ -31,6 +31,8 @@ import { ColocarCeroPipe } from './timer/pipesTimer/colocar-cero.pipe';
 import { LoginGuardGuard } from './seguridad/login-guard.guard';
 import { RememberPassComponent } from './login/rememberUserAndPass/remember-pass/remember-pass.component';
 import { RememberUserComponent } from './login/rememberUserAndPass/remember-user/remember-user.component';
+import { DesblockUserComponent } from './login/desblockUserAndChangePassword/desblock-user/desblock-user.component';
+import { ChangePasswordComponent } from './login/desblockUserAndChangePassword/change-password/change-password.component';
 
 
 const routes: Routes = [
@@ -57,7 +59,9 @@ const routes: Routes = [
     TimerComponent,
     ColocarCeroPipe,
     RememberPassComponent,
-    RememberUserComponent
+    RememberUserComponent,
+    DesblockUserComponent,
+    ChangePasswordComponent
   ],
   imports: [
     BrowserModule,

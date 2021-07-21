@@ -5,7 +5,7 @@ import { FormGroup, FormBuilder, Validator, Validators, FormControl, AbstractCon
 import { ContieneEspacios } from '../signin/validators/clave-confirm.validator';
 import { Output, EventEmitter } from '@angular/core';
 import { ComunicacionService } from '../servicios/servicios-componentes/comunicacion-service.service';
-
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
@@ -17,12 +17,16 @@ export class LoginComponent implements OnInit {
   formularioLogin: FormGroup | any;
   validacionLogin: any;
   usuarioRegistrado:boolean = true;
+  usuariobloquedo:boolean = false;
+  actualizarUsuario:any;
+
 
   constructor(
     private router: Router,
     private operacionBbddService: OperacionBbddService,
     private fromBuilder: FormBuilder,
-    private comunicacionService:ComunicacionService
+    private comunicacionService:ComunicacionService,
+    private toastr:ToastrService,
   
   ){
 
@@ -37,30 +41,55 @@ export class LoginComponent implements OnInit {
 
   accediendo(formulariologin:any){
 
-    this.operacionBbddService.loginUsuario({
+    this.operacionBbddService.actualizarEstatusUsuario({
+      usuario: formulariologin.controls.nombreUsuario.value,
+      clave: formulariologin.controls.claveUsuario.value
+    }).subscribe(respuesta =>{
 
-      Usuario: formulariologin.controls.nombreUsuario.value,
-      Clave: formulariologin.controls.claveUsuario.value
-
-    }).subscribe(respuesta => {
-
-      this.validacionLogin = respuesta;
-
-      if(this.validacionLogin.usuario != null ){
-
-        localStorage.setItem("usuario", formulariologin.controls.nombreUsuario.value);   
-        this.router.navigate(['inicio']);
-        this.usuarioRegistrado = true;
+      this.actualizarUsuario = respuesta;
+      console.log(this.actualizarUsuario);
       
+
+      if(this.actualizarUsuario.persona != null){
+        if(this.actualizarUsuario.persona.Intentos == 0){
+
+          this.usuarioRegistrado = true;
+          this.usuariobloquedo = true;
+
+        }
+
+        else if(this.actualizarUsuario.persona.Intentos > 0){
+
+          if(this.actualizarUsuario.persona.Intentos == 1){
+
+            this.toastr.warning('Si ingresa la contraseña de manera errada otra vez se le bloqueara su usuario','Precaucion');
+
+          }
+          
+          this.usuarioRegistrado = false;
+          this.usuariobloquedo = false;
+        }
+
+        else{
+
+          this.router.navigate(['inicio']);
+
+        }
+      }
+      else{
+        this.usuariobloquedo = false;
+        this.usuarioRegistrado = false;
+        
+
+
       }
 
-      else if(this.validacionLogin.usuario == null){
+      
+      
 
-        this.usuarioRegistrado = false;      
+    });
+      
 
-      }
-
-    })
   }
 
   registrarse(){

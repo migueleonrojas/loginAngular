@@ -3,17 +3,12 @@
     
 }
 
+h2{
+    margin: 0;
+}
+
 a{ 
     margin: 0 4px;
     color: rgb(0, 0, 0);
 }
 
-.col-4{
-    text-align: center;
-    
-}
-
-.col-4:nth-child(2) div, .col-4:nth-child(3) div{
-    
-    justify-content: center;
-}

@@ -34,6 +34,7 @@ export class RememberUserComponent {
     this.validacionExistente = false;
     this.modalService.open(content);
     this.formCorreo.controls.nombreCorreo.markAsUntouched();
+    this.formCorreo.reset();
   }
 
 

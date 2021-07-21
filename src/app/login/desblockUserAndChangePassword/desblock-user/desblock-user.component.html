@@ -1,0 +1,45 @@
+<ng-template #content let-modal>
+    
+        <div class="modal-header">
+            <h4 class="modal-title">Desbloquear el usuario</h4>
+            <button style="outline: none;" type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <form [formGroup]="formDes">
+                <div *ngIf="!tokenEnviado;else token" class="mb-3">
+                    <label>Indique su nombre de usuario</label>
+                    <input formControlName="nombreUsuario" (input)="ocultarMensajes()"
+                    class="form-control input-lg" type="text" placeholder="Ingrese su usuario" #user>
+                    <div class="errorCodigo" *ngIf="formDes.get('nombreUsuario')!.hasError('required') && formDes.get('nombreUsuario')!.touched">
+                        No dejar en blanco
+                    </div>
+                </div>
+
+                <ng-template #token>
+                    <div class="mb-3">
+                        <label>Indique su nombre de usuario</label>
+                        <input formControlName="token" (input)="ocultarMensajes()"
+                        class="form-control input-lg" type="text" placeholder="Ingrese su token" #tok>
+                        <div class="errorCodigo" *ngIf="formDes.get('token')!.hasError('required') && formDes.get('token')!.touched">
+                            No dejar en blanco
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <app-timer></app-timer>
+                    </div>
+                </ng-template>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <!--[disabled]="!formDes.valid"-->
+            <button type="button" class="btn btn-success" 
+            (click)="enviarNombreDeUsuario()">Enviar</button>
+            <button type="button" class="btn btn-danger" (click)="modal.close('Cancelar click')">Cancelar</button>
+        </div>
+    
+</ng-template>
+  
+<button class="btn btn-default btn-sm mr-4" (click)="open(content)">Desbloquear Usuario</button>
