@@ -78,6 +78,14 @@ export class LoginComponent implements OnInit {
             this.router.navigate(['inicio']);
 
           }
+
+          if(this.actualizarUsuario.estado.codigo == 0){
+
+            this.usuarioRegistrado = false;
+
+          }
+
+          
           
           
         }
@@ -88,10 +96,10 @@ export class LoginComponent implements OnInit {
       }
 
       else{
-        this.usuariobloquedo = false;
-        this.usuarioRegistrado = false;
-        
 
+          this.usuariobloquedo = false;
+        
+      
 
       }
 
