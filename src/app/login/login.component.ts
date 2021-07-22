@@ -40,6 +40,8 @@ export class LoginComponent implements OnInit {
 
 
   accediendo(formulariologin:any){
+    this.usuariobloquedo = false;
+    this.usuarioRegistrado = true;
 
     this.operacionBbddService.actualizarEstatusUsuario({
       usuario: formulariologin.controls.nombreUsuario.value,
@@ -47,10 +49,11 @@ export class LoginComponent implements OnInit {
     }).subscribe(respuesta =>{
 
       this.actualizarUsuario = respuesta;
-      console.log(this.actualizarUsuario);
+      
       
 
       if(this.actualizarUsuario.persona != null){
+
         if(this.actualizarUsuario.persona.Intentos == 0){
 
           this.usuarioRegistrado = true;
@@ -60,22 +63,30 @@ export class LoginComponent implements OnInit {
 
         else if(this.actualizarUsuario.persona.Intentos > 0){
 
+          
+
           if(this.actualizarUsuario.persona.Intentos == 1){
 
             this.toastr.warning('Si ingresa la contraseña de manera errada otra vez se le bloqueara su usuario','Precaucion');
 
           }
+
+          if(this.actualizarUsuario.estado.codigo == 1){
+
+            localStorage.setItem("usuario", formulariologin.controls.nombreUsuario.value);
+
+            this.router.navigate(['inicio']);
+
+          }
           
-          this.usuarioRegistrado = false;
-          this.usuariobloquedo = false;
+          
         }
 
-        else{
+        
 
-          this.router.navigate(['inicio']);
 
-        }
       }
+
       else{
         this.usuariobloquedo = false;
         this.usuarioRegistrado = false;

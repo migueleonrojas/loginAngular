@@ -83,7 +83,15 @@ export class OperacionBbddService {
 
   }
 
- 
+  enviarTokenParaDesbloquear(nombreDeUsuario:any){
+
+    let json = JSON.stringify(nombreDeUsuario);
+
+    let headers = new HttpHeaders().set('Content-Type','application/json')
+
+    return this.httpClient.post("http://localhost:3000/enviarTokenDesUser", json, {headers : headers});
+
+  }
 
 
 }

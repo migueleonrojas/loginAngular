@@ -8,29 +8,16 @@
         </div>
         <div class="modal-body">
             <form [formGroup]="formDes">
-                <div *ngIf="!tokenEnviado;else token" class="mb-3">
+                <div class="mb-3">
                     <label>Indique su nombre de usuario</label>
                     <input formControlName="nombreUsuario" (input)="ocultarMensajes()"
                     class="form-control input-lg" type="text" placeholder="Ingrese su usuario" #user>
-                    <div class="errorCodigo" *ngIf="formDes.get('nombreUsuario')!.hasError('required') && formDes.get('nombreUsuario')!.touched">
-                        No dejar en blanco
+                    <div class="errorCodigo" *ngIf="mensajeError">
+                        {{mensaje}}
                     </div>
                 </div>
 
-                <ng-template #token>
-                    <div class="mb-3">
-                        <label>Indique su nombre de usuario</label>
-                        <input formControlName="token" (input)="ocultarMensajes()"
-                        class="form-control input-lg" type="text" placeholder="Ingrese su token" #tok>
-                        <div class="errorCodigo" *ngIf="formDes.get('token')!.hasError('required') && formDes.get('token')!.touched">
-                            No dejar en blanco
-                        </div>
-                    </div>
 
-                    <div class="mb-3">
-                        <app-timer></app-timer>
-                    </div>
-                </ng-template>
             </form>
         </div>
         <div class="modal-footer">

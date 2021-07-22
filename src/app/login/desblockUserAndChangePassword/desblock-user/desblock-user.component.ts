@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validator, Validators, FormControl, AbstractControl } from '@angular/forms';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
+import { OperacionBbddService } from '../../../servicios/servicios-bbdd/operacion-bbdd.service';
+
 
 
 @Component({
@@ -11,14 +13,21 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class DesblockUserComponent implements OnInit {
 
+  mensajeError:boolean= false;
+  mensaje:string = '';
+
   formDes:FormGroup;
 
   tokenEnviado:boolean=false;
+
+  desbloqueo:any;
 
   constructor(
 
     private fromBuilder: FormBuilder,
     private modalService: NgbModal,
+    private operacionBbddService:OperacionBbddService,
+    private toast:ToastrService
 
   ) { 
 
@@ -33,8 +42,10 @@ export class DesblockUserComponent implements OnInit {
   open(content:any) {
     
     this.modalService.open(content);
-    this.formDes.controls.nombreCorreo.markAsUntouched();
+    this.formDes.controls.nombreUsuario.markAsUntouched();
     this.formDes.reset();
+    this.mensajeError = false;
+    this.mensaje = ``;
   }
 
   ngOnInit(): void {
@@ -48,7 +59,67 @@ export class DesblockUserComponent implements OnInit {
 
   enviarNombreDeUsuario(){
 
-    this.tokenEnviado=true;
+    
+    if(this.formDes.controls.nombreUsuario.status == 'VALID'){
+      this.mensajeError = false;
+      this.mensaje = "";
+      
+      this.operacionBbddService.
+      enviarTokenParaDesbloquear({
+        usuario: this.formDes.controls.nombreUsuario.value,
+        fecha: new Date().getTime()
+      })
+      .subscribe(res =>{
+
+    
+        this.desbloqueo = res;
+      
+        if(this.desbloqueo.codigo == 0){
+
+          this.mensajeError = true;
+          this.mensaje = `El usuario no se encuentra registrado`;
+
+        }
+
+        else if(this.desbloqueo.codigo == -1){
+
+          this.mensajeError = true;
+          this.mensaje = `El usuario no se encuentra bloqueado`;
+
+        }
+
+        else if(this.desbloqueo.codigo == 1) {
+
+          this.toast.success(``,`Token enviando al correo ${this.desbloqueo.correo}`)
+
+        }
+        else if(this.desbloqueo.codigo == 2){
+
+          this.mensajeError = true;
+          this.mensaje = `Debe esperar un tiempo para volver a enviar el token`;
+
+        }
+
+    }); 
+      
+
+    }
+
+    else{
+
+      this.mensajeError = true;
+      this.mensaje = `El campo no debe de estar vacio`;
+
+    }
+
+  
+    /* this.operacionBbddService.
+    enviarTokenParaDesbloquear({usuario: this.formDes.controls.nombreUsuario.value})
+    .subscribe(res =>{
+
+      console.log(res);
+
+    }); */
 
   }
 
