@@ -98,7 +98,7 @@ export class LoginComponent implements OnInit {
       else{
 
           this.usuariobloquedo = false;
-        
+          this.usuarioRegistrado = false;
       
 
       }
